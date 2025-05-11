@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Портфолио</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Портфолио</h1>
+  </header>
+
+  <section id="about">
+    <h2>О себе</h2>
+    <div class="about">
+      {% for line in data.about.bio %}
+      <p>{{ line }}</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Навыки</h2>
+    <div class="skills">
+      {% for skill in data.skills %}
+      <p>{{ skill }}</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Мои проекты</h2>
+    {% for project in data.projects %}
+    <div class="project">
+      <h3>{{ project.title }}</h3>
+      <img src="{{ url_for('static', filename=project.image) }}" alt="{{ project.title }}" class="project-image">
+      <p>{{ project.description }}</p>
+      <p><a href="{{ project.github_link }}" target="_blank">Github</a></p>
+    </div>
+    {% endfor %}
+  </section>
+
+  <footer>
+    <p>Контакты:</p>
+    <p>Email: <a href="mailto:{{ data.contact.email }}">{{ data.contact.email }}</a></p>
+    <p>Telegram: {{ data.contact.telegram }}</p>
+  </footer>
+</body>
+</html>
